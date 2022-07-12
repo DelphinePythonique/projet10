@@ -31,7 +31,7 @@ class Issue(models.Model):
     tag = models.CharField(max_length=11, choices=CHOICE_TAG)
     priority = models.CharField(max_length=6, choices=CHOICE_PRIORITY)
     status = models.CharField(max_length=9, choices=CHOICE_STATUS)
-    project = models.ForeignKey(to=Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name='issues')
     created_time = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
@@ -56,7 +56,7 @@ class Comment(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
 
 
-class Contibutor(models.Model):
+class Contributor(models.Model):
     # Your UserFollows model definition goes here
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
