@@ -8,10 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 
-from softdesk.models import Project
+from softdesk.models import Project, Issue
 from softdesk.permissions import IsOwnerOrReadOnly
 from softdesk.serializers import ProjectListSerializer, ProjectDetailSerializer, ContributorDetailSerializer, \
-    IssueDetailSerializer
+    IssueDetailSerializer, IssueListSerializer
 
 
 class ProjectViewset(ReadOnlyModelViewSet):
@@ -71,4 +71,21 @@ class AdminProjectViewset(ModelViewSet):
             return self.add_contributor_serializer_class
         if self.action == 'addIssue':
             return self.add_issue_serializer_class
+        return super().get_serializer_class()
+
+
+class AdminIssueViewset(ModelViewSet):
+    serializer_class = IssueListSerializer
+    detail_serializer_class = IssueDetailSerializer
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    def perform_update(self, serializer):
+        pass
+
+    def get_queryset(self):
+        return Issue.objects.filter(Q(author=self.request.user)| Q(project__contribute_by__user=self.request.user))
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return self.detail_serializer_class
         return super().get_serializer_class()

@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from softdesk.views import ProjectViewset, AdminProjectViewset
+from softdesk.views import ProjectViewset, AdminProjectViewset, AdminIssueViewset
 
 router = routers.SimpleRouter()
 
