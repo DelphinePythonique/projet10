@@ -24,6 +24,7 @@ router = routers.SimpleRouter()
 
 router.register('project', ProjectViewset, basename='project')
 router.register('admin/project', AdminProjectViewset, basename='admin-project')
+router.register('admin/issue', AdminIssueViewset, basename='admin-issue')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.db import models
+from django.db import models, transaction
 
 CHOICE_TYPE = [
     ("BACKEND", "back-end"),
@@ -18,16 +18,16 @@ CHOICE_STATUS = [
 class Project(models.Model):
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=2048, blank=True)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     type = models.CharField(max_length=10, choices=CHOICE_TYPE)
+
+    def __str__(self):
+        return self.title
 
 
 class Issue(models.Model):
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=2048, blank=True)
-    user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="creator"
-    )
     tag = models.CharField(max_length=11, choices=CHOICE_TAG)
     priority = models.CharField(max_length=6, choices=CHOICE_PRIORITY)
     status = models.CharField(max_length=9, choices=CHOICE_STATUS)
@@ -48,6 +48,8 @@ class Issue(models.Model):
         related_name="assignee",
     )
 
+    def __str__(self):
+        return f"{self.project}-{self.title}"
 
 class Comment(models.Model):
     description = models.CharField(max_length=2048, blank=True)
