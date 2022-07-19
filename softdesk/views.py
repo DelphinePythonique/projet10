@@ -11,7 +11,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from softdesk.models import Project, Issue
 from softdesk.permissions import IsOwnerOrReadOnly
 from softdesk.serializers import ProjectListSerializer, ProjectDetailSerializer, ContributorDetailSerializer, \
-    IssueDetailSerializer, IssueListSerializer
+    IssueDetailSerializer, IssueListSerializer, CommentListSerializer, CommentDetailSerializer
 
 
 class ProjectViewset(ReadOnlyModelViewSet):
@@ -77,13 +77,46 @@ class AdminProjectViewset(ModelViewSet):
 class AdminIssueViewset(ModelViewSet):
     serializer_class = IssueListSerializer
     detail_serializer_class = IssueDetailSerializer
+    add_comment_serializer_class = CommentDetailSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    @action(detail=True, methods=['POST'], url_path="add_issue")
+    def addComment(self, request, *args, **kwargs):
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        if isinstance(serializer, CommentDetailSerializer):
+            serializer.save(issue=self.get_object(), author=self.request.user)
 
     def perform_update(self, serializer):
         pass
 
     def get_queryset(self):
         return Issue.objects.filter(Q(author=self.request.user)| Q(project__contribute_by__user=self.request.user))
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return self.detail_serializer_class
+        if self.action == 'addComment':
+            return self.add_comment_serializer_class
+        return super().get_serializer_class()
+
+
+class AdminCommentViewset(ModelViewSet):
+    serializer_class = CommentListSerializer
+    detail_serializer_class = CommentDetailSerializer
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    def perform_update(self, serializer):
+        pass
+
+    def get_queryset(self):
+        return Issue.objects.filter(Q(author=self.request.user)| Q(get_all_contributor=self.request.user))
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

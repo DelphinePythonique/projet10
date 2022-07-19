@@ -21,6 +21,12 @@ class Project(models.Model):
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     type = models.CharField(max_length=10, choices=CHOICE_TYPE)
 
+    @property
+    def get_all_contributor(self):
+        contributors = [c.user for c in self.contribute_by.all()]
+        contributors.append(self.author)
+        return contributors
+
     def __str__(self):
         return self.title
 
@@ -31,7 +37,9 @@ class Issue(models.Model):
     tag = models.CharField(max_length=11, choices=CHOICE_TAG)
     priority = models.CharField(max_length=6, choices=CHOICE_PRIORITY)
     status = models.CharField(max_length=9, choices=CHOICE_STATUS)
-    project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name='issues')
+    project = models.ForeignKey(
+        to=Project, on_delete=models.CASCADE, related_name="issues"
+    )
     created_time = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
@@ -48,14 +56,26 @@ class Issue(models.Model):
         related_name="assignee",
     )
 
+    @property
+    def get_all_contributor(self):
+        return self.project.get_all_contributor
+
     def __str__(self):
         return f"{self.project}-{self.title}"
+
 
 class Comment(models.Model):
     description = models.CharField(max_length=2048, blank=True)
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE)
+    issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE, related_name="comments")
     created_time = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_all_contributor(self):
+        return self.issue.get_all_contributor
+
+    def __str__(self):
+        return f"{self.issue}-{self.id}"
 
 
 class Contributor(models.Model):
@@ -71,6 +91,10 @@ class Contributor(models.Model):
         related_name="contribute_by",
     )
     permission = models.BooleanField()
+
+    @property
+    def get_all_contributor(self):
+        return self.project.get_all_contributor
 
     def __str__(self):
         return f"{self.user}: contribute to project  {self.project}"

@@ -5,7 +5,7 @@ from .models import Project, Issue, Comment, Contributor
 
 
 class ProjectListSerializer(ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.ReadOnlyField(source="author.username")
 
     class Meta:
         model = Project
@@ -13,18 +13,26 @@ class ProjectListSerializer(ModelSerializer):
 
     def validate_name(self, value):
         if Project.objects.filter(name=value).exists():
-            raise serializers.ValidationError('Project already exists')
+            raise serializers.ValidationError("Project already exists")
         return value
 
 
 class ProjectDetailSerializer(ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.ReadOnlyField(source="author.username")
     issues = serializers.SerializerMethodField()
     contribute_by = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
-        fields = ["id", "title", "description", "author", "type", "contribute_by", "issues"]
+        fields = [
+            "id",
+            "title",
+            "description",
+            "author",
+            "type",
+            "contribute_by",
+            "issues",
+        ]
 
     def get_issues(self, instance):
 
@@ -40,7 +48,7 @@ class ProjectDetailSerializer(ModelSerializer):
 
 
 class ContributorSerializer(ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+    user = serializers.ReadOnlyField(source="user.username")
 
     class Meta:
         model = Contributor
@@ -48,7 +56,7 @@ class ContributorSerializer(ModelSerializer):
 
 
 class ContributorDetailSerializer(ModelSerializer):
-    project = serializers.ReadOnlyField(source='project.title')
+    project = serializers.ReadOnlyField(source="project.title")
 
     class Meta:
         model = Contributor
@@ -59,17 +67,19 @@ class IssueListSerializer(ModelSerializer):
     class Meta:
         model = Issue
         fields = [
+            "id",
             "title",
             "author",
             "tag",
             "priority",
             "status",
-         ]
+        ]
 
 
 class IssueDetailSerializer(ModelSerializer):
-    project = serializers.ReadOnlyField(source='project.title')
-    author = serializers.ReadOnlyField(source='author.username')
+    project = serializers.ReadOnlyField(source="project.title")
+    author = serializers.ReadOnlyField(source="author.username")
+    comments = serializers.SerializerMethodField()
 
     class Meta:
         model = Issue
@@ -84,10 +94,28 @@ class IssueDetailSerializer(ModelSerializer):
             "created_time",
             "author",
             "assignee",
+            "comments",
         ]
 
+    def get_comments(self, instance):
 
-class CommentSerializer(ModelSerializer):
+        queryset = instance.comments
+        serializer = CommentListSerializer(queryset, many=True)
+        return serializer.data
+
+class CommentListSerializer(ModelSerializer):
+    issue = serializers.ReadOnlyField(source="issue.title")
+    author = serializers.ReadOnlyField(source="author.username")
     class Meta:
         model = Comment
-        fields = ["id", "description", "author", "created_time"]
+        fields = ["id", "issue", "description", "author", "created_time"]
+
+
+class CommentDetailSerializer(ModelSerializer):
+
+    issue = serializers.ReadOnlyField(source="issue.title")
+    author = serializers.ReadOnlyField(source="author.username")
+
+    class Meta:
+        model = Comment
+        fields = ["id", "description", "issue", "author", "created_time"]
