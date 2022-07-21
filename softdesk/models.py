@@ -22,7 +22,7 @@ class Project(models.Model):
     type = models.CharField(max_length=10, choices=CHOICE_TYPE)
 
     @property
-    def get_all_contributor(self):
+    def all_contributors(self):
         contributors = [c.user for c in self.contribute_by.all()]
         contributors.append(self.author)
         return contributors
@@ -57,8 +57,8 @@ class Issue(models.Model):
     )
 
     @property
-    def get_all_contributor(self):
-        return self.project.get_all_contributor
+    def all_contributors(self):
+        return self.project.all_contributors
 
     def __str__(self):
         return f"{self.project}-{self.title}"
@@ -71,8 +71,8 @@ class Comment(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
 
     @property
-    def get_all_contributor(self):
-        return self.issue.get_all_contributor
+    def all_contributors(self):
+        return self.issue.all_contributors
 
     def __str__(self):
         return f"{self.issue}-{self.id}"
@@ -93,8 +93,8 @@ class Contributor(models.Model):
     permission = models.BooleanField()
 
     @property
-    def get_all_contributor(self):
-        return self.project.get_all_contributor
+    def all_contributors(self):
+        return self.project.all_contributors
 
     def __str__(self):
         return f"{self.user}: contribute to project  {self.project}"

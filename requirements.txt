@@ -1,2 +1,4 @@
 djangorestframework
 djangorestframework-simplejwt
+uritemplate
+pyyaml

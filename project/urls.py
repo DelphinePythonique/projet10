@@ -18,14 +18,13 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from softdesk.views import ProjectViewset, AdminProjectViewset, AdminIssueViewset, AdminCommentViewset
+from softdesk.views import ProjectViewset, ProjectViewset, IssueViewset, CommentViewset
 
 router = routers.SimpleRouter()
 
 router.register('project', ProjectViewset, basename='project')
-router.register('admin/project', AdminProjectViewset, basename='admin-project')
-router.register('admin/issue', AdminIssueViewset, basename='admin-issue')
-router.register('admin/comment', AdminCommentViewset, basename='admin-comment')
+router.register('issue', IssueViewset, basename='issue')
+router.register('comment', CommentViewset, basename='comment')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

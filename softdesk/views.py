@@ -9,31 +9,17 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 
 from softdesk.models import Project, Issue
-from softdesk.permissions import IsOwnerOrReadOnly
+from softdesk.permissions import IsOwner, IsContributor
 from softdesk.serializers import ProjectListSerializer, ProjectDetailSerializer, ContributorDetailSerializer, \
     IssueDetailSerializer, IssueListSerializer, CommentListSerializer, CommentDetailSerializer
 
 
-class ProjectViewset(ReadOnlyModelViewSet):
-    serializer_class = ProjectListSerializer
-    detail_serializer_class = ProjectDetailSerializer
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-
-        return Project.objects.filter(Q(author=self.request.user) | Q(contribute_by__user=self.request.user))
-
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return self.detail_serializer_class
-        return super().get_serializer_class()
-
-
-class AdminProjectViewset(ModelViewSet):
+class ProjectViewset(ModelViewSet):
     serializer_class = ProjectListSerializer
     detail_serializer_class = ProjectDetailSerializer
     add_contributor_serializer_class = ContributorDetailSerializer
     add_issue_serializer_class = IssueDetailSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         if isinstance(serializer, (ProjectListSerializer, ProjectDetailSerializer)):
@@ -43,8 +29,8 @@ class AdminProjectViewset(ModelViewSet):
         if isinstance(serializer, IssueDetailSerializer):
             serializer.save(project=self.get_object(), author=self.request.user)
 
-    @action(detail=True, methods=['POST'], url_path="add_contributor")
-    def addContributor(self, request, *args, **kwargs):
+    @action(detail=True, methods=['POST'])
+    def add_contributor(self, request, *args, **kwargs):
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -52,8 +38,8 @@ class AdminProjectViewset(ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    @action(detail=True, methods=['POST'], url_path="add_issue")
-    def addIssue(self, request, *args, **kwargs):
+    @action(detail=True, methods=['POST'])
+    def add_issue(self, request, *args, **kwargs):
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -67,21 +53,29 @@ class AdminProjectViewset(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'retrieve':
             return self.detail_serializer_class
-        if self.action == 'addContributor':
+        if self.action == 'add_contributor':
             return self.add_contributor_serializer_class
-        if self.action == 'addIssue':
+        if self.action == 'add_issue':
             return self.add_issue_serializer_class
         return super().get_serializer_class()
 
+    def get_permissions(self):
+        if self.action in ('update', 'partial_update', 'destroy'):
+            self.permission_classes = [IsAuthenticated, IsOwner]
+        elif self.action in ('list', 'retrieve', 'add_contributor', 'add_issue'):
+            self.permission_classes = [IsAuthenticated, IsContributor]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
 
-class AdminIssueViewset(ModelViewSet):
+class IssueViewset(ModelViewSet):
     serializer_class = IssueListSerializer
     detail_serializer_class = IssueDetailSerializer
     add_comment_serializer_class = CommentDetailSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
-    @action(detail=True, methods=['POST'], url_path="add_issue")
-    def addComment(self, request, *args, **kwargs):
+    @action(detail=True, methods=['POST'])
+    def add_comment(self, request, *args, **kwargs):
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -102,15 +96,24 @@ class AdminIssueViewset(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'retrieve':
             return self.detail_serializer_class
-        if self.action == 'addComment':
+        if self.action == 'add_comment':
             return self.add_comment_serializer_class
         return super().get_serializer_class()
 
+    def get_permissions(self):
+        if self.action in ('update', 'partial_update', 'destroy'):
+            self.permission_classes = [IsAuthenticated, IsOwner]
+        elif self.action in ('list', 'retrieve', 'add_comment'):
+            self.permission_classes = [IsAuthenticated, IsContributor]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
 
-class AdminCommentViewset(ModelViewSet):
+
+class CommentViewset(ModelViewSet):
     serializer_class = CommentListSerializer
     detail_serializer_class = CommentDetailSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def perform_update(self, serializer):
         pass
@@ -122,3 +125,12 @@ class AdminCommentViewset(ModelViewSet):
         if self.action == 'retrieve':
             return self.detail_serializer_class
         return super().get_serializer_class()
+
+    def get_permissions(self):
+        if self.action in ('update', 'partial_update', 'destroy'):
+            self.permission_classes = [IsAuthenticated, IsOwner]
+        elif self.action in ('list', 'retrieve'):
+            self.permission_classes = [IsAuthenticated, IsContributor]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
