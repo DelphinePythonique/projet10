@@ -1,0 +1,2272 @@
+{
+	"info": {
+		"_postman_id": "b448bc2d-248c-4630-a20e-2f8fffc3d309",
+		"name": "Imported from OpenAPI 3.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "project",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "retrieve Project Detail",
+									"id": "0971cc27-9a6c-4c8b-964d-302987017605",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/project/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "469472c1-7fca-4c7a-9d5d-d73bb53b008f",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "22926739-97bc-4ea6-860b-bde2b5ec7923",
+											"name": "response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/project/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"project",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"title\": \"eiusmod proident\",\n  \"type\": \"BACKEND\",\n  \"id\": -30909983,\n  \"description\": \"Ut Lorem Excepteur\",\n  \"author\": \"enim sed mollit et aliquip\",\n  \"contribute_by\": \"dolore\",\n  \"issues\": \"enim dolor\"\n}"
+										}
+									]
+								},
+								{
+									"name": "update Project List",
+									"id": "e2c811cf-291f-494e-9459-421b4850bc6d",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "tempor ullamco fugiat",
+													"description": "(Required) "
+												},
+												{
+													"key": "type",
+													"value": "BACKEND",
+													"description": "(Required) "
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/project/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "e1b69dfa-de53-4b69-85ae-3f25618ca05e",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "3feffe41-2f0d-4eb0-af0d-124804d9354d",
+											"name": "response",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "title",
+															"value": "tempor ullamco fugiat"
+														},
+														{
+															"description": "(Required) ",
+															"key": "type",
+															"value": "BACKEND"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/project/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"project",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"title\": \"eiusmod non officia\",\n  \"type\": \"SMARTPHONE\",\n  \"id\": -13479974,\n  \"author\": \"adipisicing ad reprehenderit ut nostrud\"\n}"
+										}
+									]
+								},
+								{
+									"name": "partial Update Project List",
+									"id": "5df6d50d-92f4-4d99-8820-bde3d3c50a50",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "tempor ullamco fugiat",
+													"description": "(Required) "
+												},
+												{
+													"key": "type",
+													"value": "BACKEND",
+													"description": "(Required) "
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/project/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "d7ff47bf-8f7c-4f52-b572-b7a7099734f1",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "00067c7a-486a-41c4-a050-b145206ad6ae",
+											"name": "response",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "title",
+															"value": "tempor ullamco fugiat"
+														},
+														{
+															"description": "(Required) ",
+															"key": "type",
+															"value": "BACKEND"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/project/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"project",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"title\": \"eiusmod non officia\",\n  \"type\": \"SMARTPHONE\",\n  \"id\": -13479974,\n  \"author\": \"adipisicing ad reprehenderit ut nostrud\"\n}"
+										}
+									]
+								},
+								{
+									"name": "destroy Project List",
+									"id": "a338bdac-ee13-44b5-9338-7012349778fc",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/project/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "5dce4cef-4df0-49c8-9e8a-7d7335900117",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "af68f7ed-b3cf-43b6-b114-14b47ea34611",
+											"name": "response",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/project/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"project",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "add Contributor Contributor Detail",
+									"id": "4bc2353c-2b8f-4bec-9fd9-d1157bfa1c5a",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "user",
+													"value": "77042790",
+													"description": "(Required) "
+												},
+												{
+													"key": "permission",
+													"value": "false",
+													"description": "(Required) "
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/project/:id/add_contributor/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												":id",
+												"add_contributor",
+												""
+											],
+											"variable": [
+												{
+													"id": "5d1cb47d-d42a-4fe3-9c3d-49fade4b4db6",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "61bdc631-783f-4ded-acee-d09c2bac42ba",
+											"name": "response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "user",
+															"value": "77042790"
+														},
+														{
+															"description": "(Required) ",
+															"key": "permission",
+															"value": "false"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/project/:id/add_contributor/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"project",
+														":id",
+														"add_contributor",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"user\": 52442922,\n  \"permission\": false,\n  \"project\": \"dolore minim proident\"\n}"
+										}
+									]
+								},
+								{
+									"name": "add Issue Issue Detail",
+									"id": "5959608f-e837-4c5f-8312-c82f235f751c",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "enim cillum",
+													"description": "(Required) "
+												},
+												{
+													"key": "tag",
+													"value": "IMPROVEMENT",
+													"description": "(Required) "
+												},
+												{
+													"key": "priority",
+													"value": "MEDIUM",
+													"description": "(Required) "
+												},
+												{
+													"key": "status",
+													"value": "FINISHED",
+													"description": "(Required) "
+												},
+												{
+													"key": "description",
+													"value": "cupidatat tempor magna ex nisi"
+												},
+												{
+													"key": "assignee",
+													"value": "-92872786"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/project/:id/add_issue/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												":id",
+												"add_issue",
+												""
+											],
+											"variable": [
+												{
+													"id": "3e3f5d23-e3b9-426c-8234-9eee9f90c04f",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "ae7a8be2-fbae-459d-b023-ac22c38b21d7",
+											"name": "response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "title",
+															"value": "enim cillum"
+														},
+														{
+															"description": "(Required) ",
+															"key": "tag",
+															"value": "IMPROVEMENT"
+														},
+														{
+															"description": "(Required) ",
+															"key": "priority",
+															"value": "MEDIUM"
+														},
+														{
+															"description": "(Required) ",
+															"key": "status",
+															"value": "FINISHED"
+														},
+														{
+															"key": "description",
+															"value": "cupidatat tempor magna ex nisi"
+														},
+														{
+															"key": "assignee",
+															"value": "-92872786"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/project/:id/add_issue/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"project",
+														":id",
+														"add_issue",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"title\": \"adipisicing id voluptate officia ut\",\n  \"tag\": \"IMPROVEMENT\",\n  \"priority\": \"MEDIUM\",\n  \"status\": \"INPROGESS\",\n  \"id\": 10212129,\n  \"description\": \"quis\",\n  \"project\": \"minim adipisicing laborum dolore\",\n  \"created_time\": \"1973-12-09T08:50:28.733Z\",\n  \"author\": \"occaecat adipisicing\",\n  \"assignee\": -85448770,\n  \"comments\": \"eiusmod in Ut nostrud proident\"\n}"
+										}
+									]
+								}
+							],
+							"id": "0d46ee13-7596-445a-a43c-09b44fb28d96"
+						},
+						{
+							"name": "list Project Lists",
+							"id": "205eaacf-9739-4ec9-8e74-f8ba0706680e",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/project/?limit=74875194&offset=74875194",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"project",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "74875194",
+											"description": "Number of results to return per page."
+										},
+										{
+											"key": "offset",
+											"value": "74875194",
+											"description": "The initial index from which to return the results."
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "c06fdbda-7f19-4eea-b7db-919672439162",
+									"name": "response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/project/?limit=74875194&offset=74875194",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												""
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "74875194"
+												},
+												{
+													"key": "offset",
+													"value": "74875194"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\",\n  \"results\": [\n    {\n      \"title\": \"reprehenderit ut et\",\n      \"type\": \"SMARTPHONE\",\n      \"id\": 28807553,\n      \"author\": \"nulla Ut Excepteur ipsum\"\n    },\n    {\n      \"title\": \"culpa aute consequat\",\n      \"type\": \"BACKEND\",\n      \"id\": 57297300,\n      \"author\": \"Excepteur volupt\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "create Project List",
+							"id": "995c465c-1f72-4e2f-a9a0-ea0b1cc89a51",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "tempor ullamco fugiat",
+											"description": "(Required) "
+										},
+										{
+											"key": "type",
+											"value": "BACKEND",
+											"description": "(Required) "
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/project/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"project",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "6569685f-6f24-4e65-8a06-cd39099a02d3",
+									"name": "response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"description": "(Required) ",
+													"key": "title",
+													"value": "tempor ullamco fugiat"
+												},
+												{
+													"description": "(Required) ",
+													"key": "type",
+													"value": "BACKEND"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/project/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"project",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"title\": \"eiusmod non officia\",\n  \"type\": \"SMARTPHONE\",\n  \"id\": -13479974,\n  \"author\": \"adipisicing ad reprehenderit ut nostrud\"\n}"
+								}
+							]
+						}
+					],
+					"id": "7728da76-8cd1-40c3-aa1d-44affa6a1e10"
+				},
+				{
+					"name": "issue",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "retrieve Issue Detail",
+									"id": "f695cf4b-cb69-49b6-a8e9-2c361d9f2caf",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/issue/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"issue",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "2267833c-e956-4b2e-84e7-5bf4323ece7f",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "404b0e25-d0c3-4752-92bd-28e64b726253",
+											"name": "response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/issue/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"issue",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"title\": \"adipisicing id voluptate officia ut\",\n  \"tag\": \"IMPROVEMENT\",\n  \"priority\": \"MEDIUM\",\n  \"status\": \"INPROGESS\",\n  \"id\": 10212129,\n  \"description\": \"quis\",\n  \"project\": \"minim adipisicing laborum dolore\",\n  \"created_time\": \"1973-12-09T08:50:28.733Z\",\n  \"author\": \"occaecat adipisicing\",\n  \"assignee\": -85448770,\n  \"comments\": \"eiusmod in Ut nostrud proident\"\n}"
+										}
+									]
+								},
+								{
+									"name": "update Issue List",
+									"id": "4145b6be-e636-494b-a008-6b944df95495",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "quis",
+													"description": "(Required) "
+												},
+												{
+													"key": "tag",
+													"value": "BUG",
+													"description": "(Required) "
+												},
+												{
+													"key": "priority",
+													"value": "LOW",
+													"description": "(Required) "
+												},
+												{
+													"key": "status",
+													"value": "INPROGESS",
+													"description": "(Required) "
+												},
+												{
+													"key": "author",
+													"value": "57087857"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/issue/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"issue",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "b48d0b1c-63b6-47de-aa30-2d181139c7a6",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "9ebd3733-abf2-4568-b392-de7e97d3ffd3",
+											"name": "response",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "title",
+															"value": "quis"
+														},
+														{
+															"description": "(Required) ",
+															"key": "tag",
+															"value": "BUG"
+														},
+														{
+															"description": "(Required) ",
+															"key": "priority",
+															"value": "LOW"
+														},
+														{
+															"description": "(Required) ",
+															"key": "status",
+															"value": "INPROGESS"
+														},
+														{
+															"key": "author",
+															"value": "57087857"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/issue/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"issue",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"title\": \"exercitation amet Duis dolor officia\",\n  \"tag\": \"TASK\",\n  \"priority\": \"LOW\",\n  \"status\": \"INPROGESS\",\n  \"id\": -17075253,\n  \"author\": -12901920\n}"
+										}
+									]
+								},
+								{
+									"name": "partial Update Issue List",
+									"id": "588ef518-7c67-4136-bd37-38fe260ee11e",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "title",
+													"value": "quis",
+													"description": "(Required) "
+												},
+												{
+													"key": "tag",
+													"value": "BUG",
+													"description": "(Required) "
+												},
+												{
+													"key": "priority",
+													"value": "LOW",
+													"description": "(Required) "
+												},
+												{
+													"key": "status",
+													"value": "INPROGESS",
+													"description": "(Required) "
+												},
+												{
+													"key": "author",
+													"value": "57087857"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/issue/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"issue",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "29d635a7-1291-4456-915d-ffa25305b709",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "c71a52bd-eb55-4e67-a340-8c0f37b50570",
+											"name": "response",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "title",
+															"value": "quis"
+														},
+														{
+															"description": "(Required) ",
+															"key": "tag",
+															"value": "BUG"
+														},
+														{
+															"description": "(Required) ",
+															"key": "priority",
+															"value": "LOW"
+														},
+														{
+															"description": "(Required) ",
+															"key": "status",
+															"value": "INPROGESS"
+														},
+														{
+															"key": "author",
+															"value": "57087857"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/issue/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"issue",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"title\": \"exercitation amet Duis dolor officia\",\n  \"tag\": \"TASK\",\n  \"priority\": \"LOW\",\n  \"status\": \"INPROGESS\",\n  \"id\": -17075253,\n  \"author\": -12901920\n}"
+										}
+									]
+								},
+								{
+									"name": "destroy Issue List",
+									"id": "efa22973-733a-4e97-86e1-7d20d105c79b",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/issue/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"issue",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "04f6b6f7-2cec-423e-ad45-a61450d2df41",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "6cab3f5e-9101-477e-b128-84cf67c8b7f5",
+											"name": "response",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/issue/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"issue",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "add Comment Comment Detail",
+									"id": "e4513663-675d-4480-85fa-36531530668a",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "description",
+													"value": "quis adipisicing anim"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/issue/:id/add_comment/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"issue",
+												":id",
+												"add_comment",
+												""
+											],
+											"variable": [
+												{
+													"id": "b837c8a1-b37d-4201-9489-57dd14395b7a",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "5ada5d53-8991-4227-a672-ba8ec26ed398",
+											"name": "response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "description",
+															"value": "quis adipisicing anim"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/issue/:id/add_comment/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"issue",
+														":id",
+														"add_comment",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": -66272979,\n  \"description\": \"reprehenderit id est\",\n  \"issue\": \"velit nisi eiusmod officia aliquip\",\n  \"author\": \"incididunt ipsum\",\n  \"created_time\": \"1966-10-22T16:15:10.500Z\"\n}"
+										}
+									]
+								}
+							],
+							"id": "9d25f3c0-8daf-4479-90f5-ddd8e92bd644"
+						},
+						{
+							"name": "list Issue Lists",
+							"id": "fece61e0-952e-4b33-9c93-69bc46fdbd8a",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/issue/?limit=74875194&offset=74875194",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"issue",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "74875194",
+											"description": "Number of results to return per page."
+										},
+										{
+											"key": "offset",
+											"value": "74875194",
+											"description": "The initial index from which to return the results."
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "77f49eee-1b49-439c-920d-839ad1259138",
+									"name": "response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/issue/?limit=74875194&offset=74875194",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"issue",
+												""
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "74875194"
+												},
+												{
+													"key": "offset",
+													"value": "74875194"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\",\n  \"results\": [\n    {\n      \"title\": \"velit ullamco commodo pariatur sunt\",\n      \"tag\": \"TASK\",\n      \"priority\": \"LOW\",\n      \"status\": \"TODO\",\n      \"id\": 86410868,\n      \"author\": 48683232\n    },\n    {\n      \"title\": \"sunt\",\n      \"tag\": \"BUG\",\n      \"priority\": \"LOW\",\n      \"status\": \"FINISHED\",\n      \"id\": 60086714,\n      \"author\": 85582400\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "create Issue List",
+							"id": "ff530895-0c18-48cb-b145-cbfbf32c8a03",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "quis",
+											"description": "(Required) "
+										},
+										{
+											"key": "tag",
+											"value": "BUG",
+											"description": "(Required) "
+										},
+										{
+											"key": "priority",
+											"value": "LOW",
+											"description": "(Required) "
+										},
+										{
+											"key": "status",
+											"value": "INPROGESS",
+											"description": "(Required) "
+										},
+										{
+											"key": "author",
+											"value": "57087857"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/issue/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"issue",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "e7baa1e2-3518-49d5-8c37-7e364de92860",
+									"name": "response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"description": "(Required) ",
+													"key": "title",
+													"value": "quis"
+												},
+												{
+													"description": "(Required) ",
+													"key": "tag",
+													"value": "BUG"
+												},
+												{
+													"description": "(Required) ",
+													"key": "priority",
+													"value": "LOW"
+												},
+												{
+													"description": "(Required) ",
+													"key": "status",
+													"value": "INPROGESS"
+												},
+												{
+													"key": "author",
+													"value": "57087857"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/issue/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"issue",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"title\": \"exercitation amet Duis dolor officia\",\n  \"tag\": \"TASK\",\n  \"priority\": \"LOW\",\n  \"status\": \"INPROGESS\",\n  \"id\": -17075253,\n  \"author\": -12901920\n}"
+								}
+							]
+						}
+					],
+					"id": "36d7d695-2999-4bae-a72a-208bb071809d"
+				},
+				{
+					"name": "comment",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "retrieve Comment Detail",
+									"id": "0d97880d-25fe-452a-9abf-5e2343217156",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/comment/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"comment",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "343f926a-b450-467e-a184-ef1fbb5fd425",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "19936693-3e3d-4675-96ce-8f002b21a85a",
+											"name": "response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/comment/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"comment",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": -66272979,\n  \"description\": \"reprehenderit id est\",\n  \"issue\": \"velit nisi eiusmod officia aliquip\",\n  \"author\": \"incididunt ipsum\",\n  \"created_time\": \"1966-10-22T16:15:10.500Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "update Comment List",
+									"id": "721d1966-f4fd-4eb4-b508-13426ba70800",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "description",
+													"value": "quis adipisicing anim"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/comment/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"comment",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "1e744200-3dbb-4140-8259-5994c9612a92",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "be2abf6c-f833-4aba-abe5-30c14bbad1ba",
+											"name": "response",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "description",
+															"value": "quis adipisicing anim"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/comment/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"comment",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": -14177673,\n  \"issue\": \"officia ullamco\",\n  \"description\": \"cupidatat reprehenderit ullamco fugiat in\",\n  \"author\": \"anim ut sint\",\n  \"created_time\": \"1952-04-10T05:55:31.600Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "partial Update Comment List",
+									"id": "0883ccbf-db5a-427f-849b-b2aa0724d488",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "description",
+													"value": "quis adipisicing anim"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/comment/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"comment",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "1e34b81b-c254-47d4-bb03-c07a3148c378",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "c7d40e36-4769-4b37-8eb0-543a2ded0fd6",
+											"name": "response",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "description",
+															"value": "quis adipisicing anim"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/comment/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"comment",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": -14177673,\n  \"issue\": \"officia ullamco\",\n  \"description\": \"cupidatat reprehenderit ullamco fugiat in\",\n  \"author\": \"anim ut sint\",\n  \"created_time\": \"1952-04-10T05:55:31.600Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "destroy Comment List",
+									"id": "5fd63d79-7c6b-4328-b7eb-f3c806d15580",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/comment/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"comment",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"id": "c9637bdf-d975-40f5-88f3-308ed3eef25a",
+													"key": "id",
+													"value": "aute veniam aliqua et",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "8a0610e3-9141-473e-b59b-ecb16f8a6f54",
+											"name": "response",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/comment/:id/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"comment",
+														":id",
+														""
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aute veniam aliqua et",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": ""
+										}
+									]
+								}
+							],
+							"id": "d5a4f499-3996-4b2e-93e1-7b5ee8f6be8b"
+						},
+						{
+							"name": "list Comment Lists",
+							"id": "d4a536e7-5a49-4082-8971-87c7b5b8c948",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/comment/?limit=74875194&offset=74875194",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "74875194",
+											"description": "Number of results to return per page."
+										},
+										{
+											"key": "offset",
+											"value": "74875194",
+											"description": "The initial index from which to return the results."
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "7d4425b7-60da-42d9-adb9-216aeca68996",
+									"name": "response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/comment/?limit=74875194&offset=74875194",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"comment",
+												""
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "74875194"
+												},
+												{
+													"key": "offset",
+													"value": "74875194"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\",\n  \"results\": [\n    {\n      \"id\": -36176582,\n      \"issue\": \"adipisicing sed cillum nulla\",\n      \"description\": \"sed laborum occaecat id\",\n      \"author\": \"et deserunt esse dolore\",\n      \"created_time\": \"2012-03-29T15:49:27.498Z\"\n    },\n    {\n      \"id\": -23880278,\n      \"issue\": \"occaecat nisi aute\",\n      \"description\": \"voluptate laboris in pariatur\",\n      \"author\": \"ea Excepteur exercitation nisi mollit\",\n      \"created_time\": \"2018-01-04T14:04:13.622Z\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "create Comment List",
+							"id": "d5622505-7752-4083-8d60-e6c0ef4b6060",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "description",
+											"value": "quis adipisicing anim"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/comment/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "14f5f05e-baf2-4a3a-8bf2-7369ece0bf5e",
+									"name": "response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "description",
+													"value": "quis adipisicing anim"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/comment/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"comment",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"id\": -14177673,\n  \"issue\": \"officia ullamco\",\n  \"description\": \"cupidatat reprehenderit ullamco fugiat in\",\n  \"author\": \"anim ut sint\",\n  \"created_time\": \"1952-04-10T05:55:31.600Z\"\n}"
+								}
+							]
+						}
+					],
+					"id": "6db8d346-f467-44b3-b374-9d5096e3dfb8"
+				},
+				{
+					"name": "token",
+					"item": [
+						{
+							"name": "create Token Obtain Pair",
+							"id": "c18ecdb7-3eab-4752-ba9f-1e3c4298dbbb",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "dolor adipisicing",
+											"description": "(Required) "
+										},
+										{
+											"key": "password",
+											"value": "voluptate in qui",
+											"description": "(Required) "
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/token/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"token",
+										""
+									]
+								},
+								"description": "Takes a set of user credentials and returns an access and refresh JSON web\ntoken pair to prove the authentication of those credentials."
+							},
+							"response": [
+								{
+									"id": "38de862a-4b9e-4b10-a3d4-39fb7476606b",
+									"name": "response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"description": "(Required) ",
+													"key": "username",
+													"value": "dolor adipisicing"
+												},
+												{
+													"description": "(Required) ",
+													"key": "password",
+													"value": "voluptate in qui"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/token/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"token",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"username\": \"sint Duis\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create Token Refresh",
+							"id": "24af25e5-ffdc-4e8f-83d7-4dedf9bcfe7e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "refresh",
+											"value": "mollit ad sunt",
+											"description": "(Required) "
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/token/refresh/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"token",
+										"refresh",
+										""
+									]
+								},
+								"description": "Takes a refresh type JSON web token and returns an access type JSON web\ntoken if the refresh token is valid."
+							},
+							"response": [
+								{
+									"id": "2a39121b-f38a-45cf-9abf-6176d0363158",
+									"name": "response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"description": "(Required) ",
+													"key": "refresh",
+													"value": "mollit ad sunt"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/token/refresh/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"token",
+												"refresh",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"refresh\": \"reprehenderit sit cupidatat ullamco culpa\",\n  \"access\": \"commodo reprehenderit tempor\"\n}"
+								}
+							]
+						}
+					],
+					"id": "2f1503a4-1ea7-4257-b830-b62dc79893be"
+				}
+			],
+			"id": "67838120-3565-4d10-b34d-b11a2eec5e7d"
+		}
+	],
+	"variable": [
+		{
+			"id": "33250992-3c61-4210-850c-a2086d0f062e",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
