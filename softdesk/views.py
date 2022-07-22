@@ -40,8 +40,10 @@ class ProjectViewset(ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def add_issue(self, request, *args, **kwargs):
-
-        serializer = self.get_serializer(data=request.data)
+        project = self.get_object()
+        serializer_context = self.get_serializer_context()
+        serializer_context["contributors"] = project.all_contributors
+        serializer = self.get_serializer(data=request.data, context=serializer_context)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
@@ -67,6 +69,7 @@ class ProjectViewset(ModelViewSet):
         else:
             self.permission_classes = [IsAuthenticated]
         return super().get_permissions()
+
 
 class IssueViewset(ModelViewSet):
     serializer_class = IssueListSerializer

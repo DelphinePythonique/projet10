@@ -103,9 +103,17 @@ class IssueDetailSerializer(ModelSerializer):
         serializer = CommentListSerializer(queryset, many=True)
         return serializer.data
 
+    def validate_assignee(self, value):
+        expected_assignee = self.context["contributors"]
+        if value not in expected_assignee:
+            raise serializers.ValidationError("Assignee not in contributors")
+        return value
+
+
 class CommentListSerializer(ModelSerializer):
     issue = serializers.ReadOnlyField(source="issue.title")
     author = serializers.ReadOnlyField(source="author.username")
+
     class Meta:
         model = Comment
         fields = ["id", "issue", "description", "author", "created_time"]

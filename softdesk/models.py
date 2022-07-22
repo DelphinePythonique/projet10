@@ -27,6 +27,12 @@ class Project(models.Model):
         contributors.append(self.author)
         return contributors
 
+    @property
+    def all_contributor_ids(self):
+        contributor_ids = [c.user.id for c in self.contribute_by.all()]
+        contributor_ids.append(self.author.id)
+        return contributor_ids
+
     def __str__(self):
         return self.title
 
@@ -59,6 +65,10 @@ class Issue(models.Model):
     @property
     def all_contributors(self):
         return self.project.all_contributors
+
+    @property
+    def all_contributor_ids(self):
+        return self.project.all_contributor_ids
 
     def __str__(self):
         return f"{self.project}-{self.title}"
