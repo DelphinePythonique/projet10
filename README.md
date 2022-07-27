@@ -71,8 +71,8 @@ Position yourself in the local directory in which you want to position the sourc
     }
 }
 ```
-- in terminal, go to in directory which containt manage.py
-- if you do not want use the default database, you can: 
+- in terminal, go to in directory which containing manage.py
+- if you do not want to use the default database, you can: 
   - generate database and populate it
   - create superuser -> answer questions
 ``` bash
@@ -87,6 +87,10 @@ Position yourself in the local directory in which you want to position the sourc
 ``` bash
   flake8 --format=html --htmldir=flake-report --exclude=env
 ```
-
+- in terminal, go to in directory which containing manage.py
+- generate open api file to import in postman
+``` bash
+python manage.py generateschema  --file openapi.yaml
+``
 ### <a name="use"></a>Uses
 
