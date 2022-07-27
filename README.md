@@ -1,3 +1,92 @@
 # projet10
-Create a secure RESTful API using Django REST
+## Goals: 
+Create a secure RESTful API using Django REST to manage projects and there issues.
+
+version: 1.0.0
+
+## Summary
+
+[Install](#install)
+
+[Use](#use)
+
+[Todo](TODO.md)
+
+[Changelog](CHANGELOG.md)
+
+------------
+### <a name="install"></a>Install
+
+This setup is for a development environment.
+
+Prerequisite:
+
+- \>= python3,9
+
+Through a terminal(Debian linux) or Powershell(Windows) : 
+
+Position yourself in the local directory in which you want to position the sources of the application
+``` bash
+ cd [path_to_source_directory]
+```
+-  Clone the repository via the clone command in ssh mode
+[ssh](https://docs.github.com/en/authentication/connecting-to-github-with-ssh), via la commande suivante
+
+``` bash
+ git clone git@github.com:DelphinePythonique/projet10.git
+```
+
+- Position yourself in the project directory, create a virtual environment
+
+``` bash
+ cd projet9
+ python -m venv env
+```
+- Activate virtual environment
+
+   If OS is Debian Linux: 
+``` bash
+ source env/bin/activate
+```
+   If OS is Windows:
+``` bash
+ .\env\Scripts\activate
+```
+- Install dependencies
+``` bash
+ pip install -r requirements.txt
+```
+- Install dev dependencies
+``` bash
+ pip install -r requirements_dev.txt
+```
+
+- In the settings's file change key's values , for example
+``` python
+ SECRET_KEY = "django-insecure-ceciestmasecretkeymouahahh"
+ DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "../litreview.sqlite3",
+    }
+}
+```
+- in terminal, go to in directory which containt manage.py
+- if you do not want use the default database, you can: 
+  - generate database and populate it
+  - create superuser -> answer questions
+``` bash
+ python manage.py migrate --run-syncdb
+ python manage.py createsuperuser 
+```
+- start development server 
+``` bash
+ python manage.py runserver 8000 
+```
+- generate the flake8-html report
+``` bash
+  flake8 --format=html --htmldir=flake-report --exclude=env
+```
+
+### <a name="use"></a>Uses
 

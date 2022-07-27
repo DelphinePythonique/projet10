@@ -18,6 +18,7 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from authentication.views import RegisterView
 from softdesk.views import ProjectViewset, ProjectViewset, IssueViewset, CommentViewset
 
 router = routers.SimpleRouter()
@@ -29,6 +30,7 @@ router.register('comment', CommentViewset, basename='comment')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('api_auth/register/', RegisterView.as_view(), name='auth_register'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls))
