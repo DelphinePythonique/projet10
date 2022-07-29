@@ -64,10 +64,13 @@ class ContributorDetailSerializer(ModelSerializer):
 
 
 class IssueListSerializer(ModelSerializer):
+    project = serializers.ReadOnlyField(source="project.title")
+    author = serializers.ReadOnlyField(source="author.username")
     class Meta:
         model = Issue
         fields = [
             "id",
+            'project',
             "title",
             "author",
             "tag",
@@ -111,12 +114,13 @@ class IssueDetailSerializer(ModelSerializer):
 
 
 class CommentListSerializer(ModelSerializer):
+    project = serializers.ReadOnlyField(source="issue.project.title")
     issue = serializers.ReadOnlyField(source="issue.title")
     author = serializers.ReadOnlyField(source="author.username")
 
     class Meta:
         model = Comment
-        fields = ["id", "issue", "description", "author", "created_time"]
+        fields = ["id", "project", "issue", "description", "author", "created_time"]
 
 
 class CommentDetailSerializer(ModelSerializer):

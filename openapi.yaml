@@ -1,12 +1,12 @@
 openapi: 3.0.2
 info:
-  title: ''
+  title: softdesk Api
   version: ''
 paths:
   /api/project/:
     get:
       operationId: listProjectLists
-      description: ''
+      description: Returns the list of projects to which the authenticated user contributes.
       parameters:
       - name: limit
         required: false
@@ -49,7 +49,8 @@ paths:
       - api
     post:
       operationId: createProjectList
-      description: ''
+      description: create a project instance, only accessible to an authenticated
+        user.
       parameters: []
       requestBody:
         content:
@@ -74,7 +75,7 @@ paths:
   /api/project/{id}/:
     get:
       operationId: retrieveProjectDetail
-      description: ''
+      description: Return a project instance.
       parameters:
       - name: id
         in: path
@@ -93,7 +94,7 @@ paths:
       - api
     put:
       operationId: updateProjectList
-      description: ''
+      description: update a project instance, only accessible to project's author
       parameters:
       - name: id
         in: path
@@ -123,7 +124,7 @@ paths:
       - api
     patch:
       operationId: partialUpdateProjectList
-      description: ''
+      description: update a project instance, only accessible to project's author
       parameters:
       - name: id
         in: path
@@ -153,7 +154,7 @@ paths:
       - api
     delete:
       operationId: destroyProjectList
-      description: ''
+      description: delete a project, only accessible to project's author
       parameters:
       - name: id
         in: path
@@ -169,7 +170,8 @@ paths:
   /api/issue/:
     get:
       operationId: listIssueLists
-      description: ''
+      description: Return the list of issues linked to project to which the authenticated
+        user contributes.
       parameters:
       - name: limit
         required: false
@@ -210,34 +212,11 @@ paths:
           description: ''
       tags:
       - api
-    post:
-      operationId: createIssueList
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/IssueList'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/IssueList'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/IssueList'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/IssueList'
-          description: ''
-      tags:
-      - api
   /api/issue/{id}/:
     get:
       operationId: retrieveIssueDetail
-      description: ''
+      description: Return an issue linked to project to which the authenticated user
+        contributes.
       parameters:
       - name: id
         in: path
@@ -256,7 +235,7 @@ paths:
       - api
     put:
       operationId: updateIssueList
-      description: ''
+      description: update an issue, only accessible to issue's author
       parameters:
       - name: id
         in: path
@@ -286,7 +265,7 @@ paths:
       - api
     patch:
       operationId: partialUpdateIssueList
-      description: ''
+      description: update an issue, only accessible to issue's author
       parameters:
       - name: id
         in: path
@@ -316,7 +295,7 @@ paths:
       - api
     delete:
       operationId: destroyIssueList
-      description: ''
+      description: delete an issue, only accessible to issue's author
       parameters:
       - name: id
         in: path
@@ -332,7 +311,8 @@ paths:
   /api/comment/:
     get:
       operationId: listCommentLists
-      description: ''
+      description: Returns the list of comments linked to project which the authenticated
+        user contributes.
       parameters:
       - name: limit
         required: false
@@ -373,34 +353,11 @@ paths:
           description: ''
       tags:
       - api
-    post:
-      operationId: createCommentList
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CommentList'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CommentList'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CommentList'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommentList'
-          description: ''
-      tags:
-      - api
   /api/comment/{id}/:
     get:
       operationId: retrieveCommentDetail
-      description: ''
+      description: Return a comment linked to project which the authenticated user
+        contributes.
       parameters:
       - name: id
         in: path
@@ -419,7 +376,7 @@ paths:
       - api
     put:
       operationId: updateCommentList
-      description: ''
+      description: update a comment, only accessible to comment's author
       parameters:
       - name: id
         in: path
@@ -449,7 +406,7 @@ paths:
       - api
     patch:
       operationId: partialUpdateCommentList
-      description: ''
+      description: update an issue, only accessible to comment's author
       parameters:
       - name: id
         in: path
@@ -479,7 +436,7 @@ paths:
       - api
     delete:
       operationId: destroyCommentList
-      description: ''
+      description: delete an issue, only accessible to comment's author
       parameters:
       - name: id
         in: path
@@ -492,7 +449,7 @@ paths:
           description: ''
       tags:
       - api
-  /api_auth/register/:
+  /api-auth/register/:
     post:
       operationId: createUser
       description: ''
@@ -517,34 +474,6 @@ paths:
           description: ''
       tags:
       - api-auth
-  /api/token/:
-    post:
-      operationId: createTokenObtainPair
-      description: 'Takes a set of user credentials and returns an access and refresh
-        JSON web
-
-        token pair to prove the authentication of those credentials.'
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TokenObtainPair'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/TokenObtainPair'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/TokenObtainPair'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TokenObtainPair'
-          description: ''
-      tags:
-      - api
   /api/token/refresh/:
     post:
       operationId: createTokenRefresh
@@ -573,10 +502,38 @@ paths:
           description: ''
       tags:
       - api
+  /api/token/:
+    post:
+      operationId: createTokenObtainPair
+      description: 'Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+      tags:
+      - api
   /api/project/{id}/add_contributor/:
     post:
       operationId: addContributorContributorDetail
-      description: ''
+      description: Add a contributor to a project, only accessible to a project contributor
       parameters:
       - name: id
         in: path
@@ -607,7 +564,7 @@ paths:
   /api/project/{id}/add_issue/:
     post:
       operationId: addIssueIssueDetail
-      description: ''
+      description: Add an issue to a project, only accessible to a project contributor
       parameters:
       - name: id
         in: path
@@ -638,7 +595,7 @@ paths:
   /api/issue/{id}/add_comment/:
     post:
       operationId: addCommentCommentDetail
-      description: ''
+      description: Add a comment to an issue, only accessible to a project contributor
       parameters:
       - name: id
         in: path
@@ -725,12 +682,15 @@ components:
         id:
           type: integer
           readOnly: true
+        project:
+          type: string
+          readOnly: true
         title:
           type: string
           maxLength: 128
         author:
-          type: integer
-          nullable: true
+          type: string
+          readOnly: true
         tag:
           enum:
           - BUG
@@ -811,6 +771,9 @@ components:
         id:
           type: integer
           readOnly: true
+        project:
+          type: string
+          readOnly: true
         issue:
           type: string
           readOnly: true
@@ -858,22 +821,20 @@ components:
         password2:
           type: string
           writeOnly: true
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-          maxLength: 150
-        last_name:
-          type: string
-          maxLength: 150
       required:
       - username
       - password
       - password2
-      - email
-      - first_name
-      - last_name
+    TokenRefresh:
+      type: object
+      properties:
+        refresh:
+          type: string
+        access:
+          type: string
+          readOnly: true
+      required:
+      - refresh
     TokenObtainPair:
       type: object
       properties:
@@ -885,16 +846,6 @@ components:
       required:
       - username
       - password
-    TokenRefresh:
-      type: object
-      properties:
-        refresh:
-          type: string
-        access:
-          type: string
-          readOnly: true
-      required:
-      - refresh
     ContributorDetail:
       type: object
       properties:

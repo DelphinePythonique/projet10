@@ -16,7 +16,7 @@ CHOICE_STATUS = [
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, verbose_name="project's title")
     description = models.CharField(max_length=2048, blank=True)
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     type = models.CharField(max_length=10, choices=CHOICE_TYPE)
