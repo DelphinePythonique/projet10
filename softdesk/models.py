@@ -15,11 +15,17 @@ CHOICE_STATUS = [
 ]
 
 
+def get_help_text(calling_class, choices):
+    text = [f"This field is used to categorize the {calling_class}. Use"]
+    text.extend([f"{choice[0]}=>{choice[1]}" for choice in choices])
+    return ', '.join(text)
+
+
 class Project(models.Model):
-    title = models.CharField(max_length=128, verbose_name="project's title")
-    description = models.CharField(max_length=2048, blank=True)
-    author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    type = models.CharField(max_length=10, choices=CHOICE_TYPE)
+    title = models.CharField(max_length=128, help_text="project's title")
+    description = models.CharField(max_length=2048, blank=True,  help_text="project's description")
+    author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, help_text="project's author")
+    type = models.CharField(max_length=10, choices=CHOICE_TYPE, help_text=get_help_text("project", CHOICE_TYPE))
 
     @property
     def all_contributors(self):
@@ -40,9 +46,9 @@ class Project(models.Model):
 class Issue(models.Model):
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=2048, blank=True)
-    tag = models.CharField(max_length=11, choices=CHOICE_TAG)
-    priority = models.CharField(max_length=6, choices=CHOICE_PRIORITY)
-    status = models.CharField(max_length=9, choices=CHOICE_STATUS)
+    tag = models.CharField(max_length=11, choices=CHOICE_TAG, help_text=get_help_text("issue", CHOICE_TAG))
+    priority = models.CharField(max_length=6, choices=CHOICE_PRIORITY, help_text=get_help_text("issue", CHOICE_PRIORITY))
+    status = models.CharField(max_length=9, choices=CHOICE_STATUS, help_text=get_help_text("issue", CHOICE_STATUS))
     project = models.ForeignKey(
         to=Project, on_delete=models.CASCADE, related_name="issues"
     )

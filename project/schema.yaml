@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: softdesk Api
+  title: ''
   version: ''
 paths:
   /api/project/:
@@ -633,6 +633,7 @@ components:
           readOnly: true
         title:
           type: string
+          description: project's title
           maxLength: 128
         author:
           type: string
@@ -643,6 +644,8 @@ components:
           - FRONTEND
           - SMARTPHONE
           type: string
+          description: This field is used to categorize the project. Use, BACKEND=>back-end,
+            FRONTEND=>front-end, SMARTPHONE=>iOS ou Android
       required:
       - title
       - type
@@ -654,9 +657,11 @@ components:
           readOnly: true
         title:
           type: string
+          description: project's title
           maxLength: 128
         description:
           type: string
+          description: project's description
           maxLength: 2048
         author:
           type: string
@@ -667,6 +672,8 @@ components:
           - FRONTEND
           - SMARTPHONE
           type: string
+          description: This field is used to categorize the project. Use, BACKEND=>back-end,
+            FRONTEND=>front-end, SMARTPHONE=>iOS ou Android
         contribute_by:
           type: string
           readOnly: true
@@ -697,18 +704,24 @@ components:
           - IMPROVEMENT
           - TASK
           type: string
+          description: This field is used to categorize the issue. Use, BUG=>bug,
+            IMPROVEMENT=>improvement, TASK=>task
         priority:
           enum:
           - LOW
           - MEDIUM
           - HIGH
           type: string
+          description: This field is used to categorize the issue. Use, LOW=>low,
+            MEDIUM=>medium, HIGH=>high
         status:
           enum:
           - TODO
           - INPROGESS
           - FINISHED
           type: string
+          description: This field is used to categorize the issue. Use, TODO=>to do,
+            INPROGESS=>in progress, FINISHED=>finished
       required:
       - title
       - tag
@@ -732,18 +745,24 @@ components:
           - IMPROVEMENT
           - TASK
           type: string
+          description: This field is used to categorize the issue. Use, BUG=>bug,
+            IMPROVEMENT=>improvement, TASK=>task
         priority:
           enum:
           - LOW
           - MEDIUM
           - HIGH
           type: string
+          description: This field is used to categorize the issue. Use, LOW=>low,
+            MEDIUM=>medium, HIGH=>high
         status:
           enum:
           - TODO
           - INPROGESS
           - FINISHED
           type: string
+          description: This field is used to categorize the issue. Use, TODO=>to do,
+            INPROGESS=>in progress, FINISHED=>finished
         project:
           type: string
           readOnly: true

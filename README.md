@@ -90,7 +90,8 @@ Position yourself in the local directory in which you want to position the sourc
 - in terminal, go to in directory which containing manage.py
 - generate open api file to import in postman
 ``` bash
-python manage.py generateschema  --file openapi.yaml  --title "softdesk Api"
+python manage.py generateschema  --file project/schema.yaml --title "softdesk Api"
+
 ``
 ### <a name="use"></a>Uses
 
