@@ -1,5 +1,4 @@
 from django.db.models import Q
-from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import status, mixins
@@ -43,6 +42,11 @@ class ProjectViewset(ModelViewSet):
     delete a project, only accessible to project's author
 
     """
+    schema = AutoSchema(
+        tags=['Project'],
+        component_name='Project',
+        operation_id_base='Project',
+    )
 
     serializer_class = ProjectListSerializer
     detail_serializer_class = ProjectDetailSerializer
@@ -137,6 +141,12 @@ class IssueViewset(
 
     """
 
+    schema = AutoSchema(
+        tags=['project', 'issue'],
+        component_name='Issue',
+        operation_id_base='Issue',
+    )
+
     serializer_class = IssueListSerializer
     detail_serializer_class = IssueDetailSerializer
     add_comment_serializer_class = CommentDetailSerializer
@@ -212,6 +222,12 @@ class CommentViewset(
     delete an issue, only accessible to comment's author
 
     """
+
+    schema = AutoSchema(
+        tags=['project', 'issue', 'comment'],
+        component_name='Comment',
+        operation_id_base='Comment',
+    )
     serializer_class = CommentListSerializer
     detail_serializer_class = CommentDetailSerializer
     permission_classes = [IsAuthenticated]

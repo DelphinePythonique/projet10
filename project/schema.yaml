@@ -5,7 +5,7 @@ info:
 paths:
   /api/project/:
     get:
-      operationId: listProjectLists
+      operationId: listProjects
       description: Returns the list of projects to which the authenticated user contributes.
       parameters:
       - name: limit
@@ -43,12 +43,12 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ProjectList'
+                      $ref: '#/components/schemas/Project'
           description: ''
       tags:
-      - api
+      - Project
     post:
-      operationId: createProjectList
+      operationId: createProject
       description: create a project instance, only accessible to an authenticated
         user.
       parameters: []
@@ -56,25 +56,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectList'
+                $ref: '#/components/schemas/Project'
           description: ''
       tags:
-      - api
+      - Project
   /api/project/{id}/:
     get:
-      operationId: retrieveProjectDetail
+      operationId: retrieveProject
       description: Return a project instance.
       parameters:
       - name: id
@@ -88,12 +88,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectDetail'
+                $ref: '#/components/schemas/Project'
           description: ''
       tags:
-      - api
+      - Project
     put:
-      operationId: updateProjectList
+      operationId: updateProject
       description: update a project instance, only accessible to project's author
       parameters:
       - name: id
@@ -106,24 +106,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectList'
+                $ref: '#/components/schemas/Project'
           description: ''
       tags:
-      - api
+      - Project
     patch:
-      operationId: partialUpdateProjectList
+      operationId: partialUpdateProject
       description: update a project instance, only accessible to project's author
       parameters:
       - name: id
@@ -136,24 +136,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/ProjectList'
+              $ref: '#/components/schemas/Project'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectList'
+                $ref: '#/components/schemas/Project'
           description: ''
       tags:
-      - api
+      - Project
     delete:
-      operationId: destroyProjectList
+      operationId: destroyProject
       description: delete a project, only accessible to project's author
       parameters:
       - name: id
@@ -166,10 +166,10 @@ paths:
         '204':
           description: ''
       tags:
-      - api
+      - Project
   /api/issue/:
     get:
-      operationId: listIssueLists
+      operationId: listIssues
       description: Return the list of issues linked to project to which the authenticated
         user contributes.
       parameters:
@@ -208,13 +208,14 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/IssueList'
+                      $ref: '#/components/schemas/Issue'
           description: ''
       tags:
-      - api
+      - project
+      - issue
   /api/issue/{id}/:
     get:
-      operationId: retrieveIssueDetail
+      operationId: retrieveIssue
       description: Return an issue linked to project to which the authenticated user
         contributes.
       parameters:
@@ -229,12 +230,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IssueDetail'
+                $ref: '#/components/schemas/Issue'
           description: ''
       tags:
-      - api
+      - project
+      - issue
     put:
-      operationId: updateIssueList
+      operationId: updateIssue
       description: update an issue, only accessible to issue's author
       parameters:
       - name: id
@@ -247,24 +249,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IssueList'
+              $ref: '#/components/schemas/Issue'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/IssueList'
+              $ref: '#/components/schemas/Issue'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/IssueList'
+              $ref: '#/components/schemas/Issue'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IssueList'
+                $ref: '#/components/schemas/Issue'
           description: ''
       tags:
-      - api
+      - project
+      - issue
     patch:
-      operationId: partialUpdateIssueList
+      operationId: partialUpdateIssue
       description: update an issue, only accessible to issue's author
       parameters:
       - name: id
@@ -277,24 +280,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IssueList'
+              $ref: '#/components/schemas/Issue'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/IssueList'
+              $ref: '#/components/schemas/Issue'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/IssueList'
+              $ref: '#/components/schemas/Issue'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IssueList'
+                $ref: '#/components/schemas/Issue'
           description: ''
       tags:
-      - api
+      - project
+      - issue
     delete:
-      operationId: destroyIssueList
+      operationId: destroyIssue
       description: delete an issue, only accessible to issue's author
       parameters:
       - name: id
@@ -307,10 +311,11 @@ paths:
         '204':
           description: ''
       tags:
-      - api
+      - project
+      - issue
   /api/comment/:
     get:
-      operationId: listCommentLists
+      operationId: listComments
       description: Returns the list of comments linked to project which the authenticated
         user contributes.
       parameters:
@@ -349,13 +354,15 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/CommentList'
+                      $ref: '#/components/schemas/Comment'
           description: ''
       tags:
-      - api
+      - project
+      - issue
+      - comment
   /api/comment/{id}/:
     get:
-      operationId: retrieveCommentDetail
+      operationId: retrieveComment
       description: Return a comment linked to project which the authenticated user
         contributes.
       parameters:
@@ -370,12 +377,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentDetail'
+                $ref: '#/components/schemas/Comment'
           description: ''
       tags:
-      - api
+      - project
+      - issue
+      - comment
     put:
-      operationId: updateCommentList
+      operationId: updateComment
       description: update a comment, only accessible to comment's author
       parameters:
       - name: id
@@ -388,24 +397,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommentList'
+              $ref: '#/components/schemas/Comment'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CommentList'
+              $ref: '#/components/schemas/Comment'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CommentList'
+              $ref: '#/components/schemas/Comment'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentList'
+                $ref: '#/components/schemas/Comment'
           description: ''
       tags:
-      - api
+      - project
+      - issue
+      - comment
     patch:
-      operationId: partialUpdateCommentList
+      operationId: partialUpdateComment
       description: update an issue, only accessible to comment's author
       parameters:
       - name: id
@@ -418,24 +429,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommentList'
+              $ref: '#/components/schemas/Comment'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CommentList'
+              $ref: '#/components/schemas/Comment'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CommentList'
+              $ref: '#/components/schemas/Comment'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentList'
+                $ref: '#/components/schemas/Comment'
           description: ''
       tags:
-      - api
+      - project
+      - issue
+      - comment
     delete:
-      operationId: destroyCommentList
+      operationId: destroyComment
       description: delete an issue, only accessible to comment's author
       parameters:
       - name: id
@@ -448,7 +461,9 @@ paths:
         '204':
           description: ''
       tags:
-      - api
+      - project
+      - issue
+      - comment
   /api-auth/register/:
     post:
       operationId: createUser
@@ -532,7 +547,7 @@ paths:
       - api
   /api/project/{id}/add_contributor/:
     post:
-      operationId: addContributorContributorDetail
+      operationId: addContributorProject
       description: Add a contributor to a project, only accessible to a project contributor
       parameters:
       - name: id
@@ -545,25 +560,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ContributorDetail'
+              $ref: '#/components/schemas/Project'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/ContributorDetail'
+              $ref: '#/components/schemas/Project'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/ContributorDetail'
+              $ref: '#/components/schemas/Project'
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContributorDetail'
+                $ref: '#/components/schemas/Project'
           description: ''
       tags:
-      - api
+      - Project
   /api/project/{id}/add_issue/:
     post:
-      operationId: addIssueIssueDetail
+      operationId: addIssueProject
       description: Add an issue to a project, only accessible to a project contributor
       parameters:
       - name: id
@@ -576,25 +591,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IssueDetail'
+              $ref: '#/components/schemas/Project'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/IssueDetail'
+              $ref: '#/components/schemas/Project'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/IssueDetail'
+              $ref: '#/components/schemas/Project'
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IssueDetail'
+                $ref: '#/components/schemas/Project'
           description: ''
       tags:
-      - api
+      - Project
   /api/issue/{id}/add_comment/:
     post:
-      operationId: addCommentCommentDetail
+      operationId: addCommentIssue
       description: Add a comment to an issue, only accessible to a project contributor
       parameters:
       - name: id
@@ -607,25 +622,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommentDetail'
+              $ref: '#/components/schemas/Issue'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CommentDetail'
+              $ref: '#/components/schemas/Issue'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CommentDetail'
+              $ref: '#/components/schemas/Issue'
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentDetail'
+                $ref: '#/components/schemas/Issue'
           description: ''
       tags:
-      - api
+      - project
+      - issue
 components:
   schemas:
-    ProjectList:
+    Project:
       type: object
       properties:
         id:
@@ -649,41 +665,7 @@ components:
       required:
       - title
       - type
-    ProjectDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        title:
-          type: string
-          description: project's title
-          maxLength: 128
-        description:
-          type: string
-          description: project's description
-          maxLength: 2048
-        author:
-          type: string
-          readOnly: true
-        type:
-          enum:
-          - BACKEND
-          - FRONTEND
-          - SMARTPHONE
-          type: string
-          description: This field is used to categorize the project. Use, BACKEND=>back-end,
-            FRONTEND=>front-end, SMARTPHONE=>iOS ou Android
-        contribute_by:
-          type: string
-          readOnly: true
-        issues:
-          type: string
-          readOnly: true
-      required:
-      - title
-      - type
-    IssueList:
+    Issue:
       type: object
       properties:
         id:
@@ -727,64 +709,7 @@ components:
       - tag
       - priority
       - status
-    IssueDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        title:
-          type: string
-          maxLength: 128
-        description:
-          type: string
-          maxLength: 2048
-        tag:
-          enum:
-          - BUG
-          - IMPROVEMENT
-          - TASK
-          type: string
-          description: This field is used to categorize the issue. Use, BUG=>bug,
-            IMPROVEMENT=>improvement, TASK=>task
-        priority:
-          enum:
-          - LOW
-          - MEDIUM
-          - HIGH
-          type: string
-          description: This field is used to categorize the issue. Use, LOW=>low,
-            MEDIUM=>medium, HIGH=>high
-        status:
-          enum:
-          - TODO
-          - INPROGESS
-          - FINISHED
-          type: string
-          description: This field is used to categorize the issue. Use, TODO=>to do,
-            INPROGESS=>in progress, FINISHED=>finished
-        project:
-          type: string
-          readOnly: true
-        created_time:
-          type: string
-          format: date-time
-          readOnly: true
-        author:
-          type: string
-          readOnly: true
-        assignee:
-          type: integer
-          nullable: true
-        comments:
-          type: string
-          readOnly: true
-      required:
-      - title
-      - tag
-      - priority
-      - status
-    CommentList:
+    Comment:
       type: object
       properties:
         id:
@@ -799,25 +724,6 @@ components:
         description:
           type: string
           maxLength: 2048
-        author:
-          type: string
-          readOnly: true
-        created_time:
-          type: string
-          format: date-time
-          readOnly: true
-    CommentDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        description:
-          type: string
-          maxLength: 2048
-        issue:
-          type: string
-          readOnly: true
         author:
           type: string
           readOnly: true
@@ -865,16 +771,3 @@ components:
       required:
       - username
       - password
-    ContributorDetail:
-      type: object
-      properties:
-        project:
-          type: string
-          readOnly: true
-        user:
-          type: integer
-        permission:
-          type: boolean
-      required:
-      - user
-      - permission
