@@ -29,9 +29,9 @@ router.register('comment', CommentViewset, basename='comment')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/register/', RegisterView.as_view(), name='auth_register'),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/register/', RegisterView.as_view(), name='register'),
     path('api/', include(router.urls))
 ]
