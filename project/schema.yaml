@@ -520,7 +520,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenRefresh'
+                type: object
+                properties:
+                  access:
+                    type: string
           description: ''
       tags:
       - api
@@ -548,11 +551,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenObtainPair'
+                type: object
+                properties:
+                  refresh:
+                    type: string
+                  access:
+                    type: string
           description: ''
       tags:
       - api
-  /api/register/:
+  /api/signup/:
     post:
       operationId: createUser
       description: ''
@@ -561,19 +569,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Register'
+              $ref: '#/components/schemas/Signup'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Register'
+              $ref: '#/components/schemas/Signup'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Register'
+              $ref: '#/components/schemas/Signup'
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Register'
+                $ref: '#/components/schemas/Signup'
           description: ''
       tags:
       - api
@@ -795,7 +803,7 @@ components:
       required:
       - username
       - password
-    Register:
+    Signup:
       type: object
       properties:
         username:
