@@ -159,18 +159,12 @@ class IssueViewset(
         """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
+        serializer.save(issue=self.get_object(), author=self.request.user)
+
         return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+            serializer.data, status=status.HTTP_201_CREATED
         )
 
-    def perform_create(self, serializer):
-        if isinstance(serializer, CommentDetailSerializer):
-            serializer.save(issue=self.get_object(), author=self.request.user)
-
-    def perform_update(self, serializer):
-        pass
 
     def get_serializer_class(self):
         if self.action == "retrieve":
@@ -232,8 +226,6 @@ class CommentViewset(
     detail_serializer_class = CommentDetailSerializer
     permission_classes = [IsAuthenticated]
 
-    def perform_update(self, serializer):
-        pass
 
     def get_serializer_class(self):
         if self.action == "retrieve":
