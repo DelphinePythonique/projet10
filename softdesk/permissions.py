@@ -1,6 +1,4 @@
-from rest_framework.permissions import BasePermission, SAFE_METHODS
-
-from softdesk.models import Project, Issue, Contributor, Comment
+from rest_framework.permissions import BasePermission
 
 
 class IsOwner(BasePermission):
@@ -11,12 +9,12 @@ class IsOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
-        #if request.method in SAFE_METHODS:
+        # if request.method in SAFE_METHODS:
         #    return True
         return obj.author == request.user
 
-class IsContributor(BasePermission):
 
+class IsContributor(BasePermission):
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.

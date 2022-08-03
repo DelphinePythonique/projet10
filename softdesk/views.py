@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.schemas.openapi import AutoSchema
-from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet, GenericViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
 from softdesk.models import Project, Issue, Comment
 from softdesk.permissions import IsOwner, IsContributor
@@ -42,10 +42,11 @@ class ProjectViewset(ModelViewSet):
     delete a project, only accessible to project's author
 
     """
+
     schema = AutoSchema(
-        tags=['Project'],
-        component_name='Project',
-        operation_id_base='Project',
+        tags=["Project"],
+        component_name="Project",
+        operation_id_base="Project",
     )
 
     serializer_class = ProjectListSerializer
@@ -142,9 +143,9 @@ class IssueViewset(
     """
 
     schema = AutoSchema(
-        tags=['project', 'issue'],
-        component_name='Issue',
-        operation_id_base='Issue',
+        tags=["project", "issue"],
+        component_name="Issue",
+        operation_id_base="Issue",
     )
 
     serializer_class = IssueListSerializer
@@ -161,10 +162,7 @@ class IssueViewset(
         serializer.is_valid(raise_exception=True)
         serializer.save(issue=self.get_object(), author=self.request.user)
 
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED
-        )
-
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get_serializer_class(self):
         if self.action == "retrieve":
@@ -218,14 +216,13 @@ class CommentViewset(
     """
 
     schema = AutoSchema(
-        tags=['project', 'issue', 'comment'],
-        component_name='Comment',
-        operation_id_base='Comment',
+        tags=["project", "issue", "comment"],
+        component_name="Comment",
+        operation_id_base="Comment",
     )
     serializer_class = CommentListSerializer
     detail_serializer_class = CommentDetailSerializer
     permission_classes = [IsAuthenticated]
-
 
     def get_serializer_class(self):
         if self.action == "retrieve":

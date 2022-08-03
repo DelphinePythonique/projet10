@@ -19,7 +19,7 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from authentication.views import RegisterView
-from softdesk.views import ProjectViewset, ProjectViewset, IssueViewset, CommentViewset
+from softdesk.views import ProjectViewset, IssueViewset, CommentViewset
 
 router = routers.SimpleRouter()
 

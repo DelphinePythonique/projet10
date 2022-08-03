@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.db import models, transaction
+from django.db import models
 
 CHOICE_TYPE = [
     ("BACKEND", "back-end"),
@@ -18,14 +18,24 @@ CHOICE_STATUS = [
 def get_help_text(calling_class, choices):
     text = [f"This field is used to categorize the {calling_class}. Use"]
     text.extend([f"{choice[0]}=>{choice[1]}" for choice in choices])
-    return ', '.join(text)
+    return ", ".join(text)
 
 
 class Project(models.Model):
     title = models.CharField(max_length=128, help_text="project's title")
-    description = models.CharField(max_length=2048, blank=True,  help_text="project's description")
-    author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, help_text="project's author")
-    type = models.CharField(max_length=10, choices=CHOICE_TYPE, help_text=get_help_text("project", CHOICE_TYPE))
+    description = models.CharField(
+        max_length=2048, blank=True, help_text="project's description"
+    )
+    author = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        help_text="project's author",
+    )
+    type = models.CharField(
+        max_length=10,
+        choices=CHOICE_TYPE,
+        help_text=get_help_text("project", CHOICE_TYPE),
+    )
 
     @property
     def all_contributors(self):
@@ -46,9 +56,19 @@ class Project(models.Model):
 class Issue(models.Model):
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=2048, blank=True)
-    tag = models.CharField(max_length=11, choices=CHOICE_TAG, help_text=get_help_text("issue", CHOICE_TAG))
-    priority = models.CharField(max_length=6, choices=CHOICE_PRIORITY, help_text=get_help_text("issue", CHOICE_PRIORITY))
-    status = models.CharField(max_length=9, choices=CHOICE_STATUS, help_text=get_help_text("issue", CHOICE_STATUS))
+    tag = models.CharField(
+        max_length=11, choices=CHOICE_TAG, help_text=get_help_text("issue", CHOICE_TAG)
+    )
+    priority = models.CharField(
+        max_length=6,
+        choices=CHOICE_PRIORITY,
+        help_text=get_help_text("issue", CHOICE_PRIORITY),
+    )
+    status = models.CharField(
+        max_length=9,
+        choices=CHOICE_STATUS,
+        help_text=get_help_text("issue", CHOICE_STATUS),
+    )
     project = models.ForeignKey(
         to=Project, on_delete=models.CASCADE, related_name="issues"
     )
@@ -83,7 +103,9 @@ class Issue(models.Model):
 class Comment(models.Model):
     description = models.CharField(max_length=2048, blank=True)
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE, related_name="comments")
+    issue = models.ForeignKey(
+        to=Issue, on_delete=models.CASCADE, related_name="comments"
+    )
     created_time = models.DateTimeField(auto_now_add=True)
 
     @property

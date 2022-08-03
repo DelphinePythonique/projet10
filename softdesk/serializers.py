@@ -66,11 +66,12 @@ class ContributorDetailSerializer(ModelSerializer):
 class IssueListSerializer(ModelSerializer):
     project = serializers.ReadOnlyField(source="project.title")
     author = serializers.ReadOnlyField(source="author.username")
+
     class Meta:
         model = Issue
         fields = [
             "id",
-            'project',
+            "project",
             "title",
             "author",
             "tag",
