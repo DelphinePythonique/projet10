@@ -168,7 +168,7 @@ class IssueViewset(
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get_serializer_class(self):
-        if self.action == "retrieve":
+        if self.action in ("retrieve", "partial_update", "update"):
             return self.detail_serializer_class
         if self.action == "add_comment":
             return self.add_comment_serializer_class
@@ -190,6 +190,24 @@ class IssueViewset(
             | Q(project__contribute_by__user=self.request.user)
             | Q(project__author=self.request.user)
         ).distinct()
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+
+        serializer_context = self.get_serializer_context()
+        serializer_context["contributors"] = instance.all_contributors
+
+        serializer = self.get_serializer(instance, data=request.data, partial=partial, context=serializer_context)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
 
 
 class CommentViewset(
