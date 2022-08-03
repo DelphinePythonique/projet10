@@ -527,7 +527,7 @@ paths:
           description: ''
       tags:
       - api
-  /api/token/:
+  /api/login/:
     post:
       operationId: createTokenObtainPair
       description: 'Takes a set of user credentials and returns an access and refresh
