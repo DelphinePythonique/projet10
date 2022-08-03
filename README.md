@@ -65,9 +65,9 @@ Position yourself in the local directory in which you want to position the sourc
 ``` python
  SECRET_KEY = "django-insecure-ceciestmasecretkeymouahahh"
  DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "../litreview.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 ```
