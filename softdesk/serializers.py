@@ -62,6 +62,12 @@ class ContributorDetailSerializer(ModelSerializer):
         model = Contributor
         fields = ["project", "user", "permission"]
 
+    def validate_user(self, value):
+        users = self.context["contributors"]
+        if value in users:
+            raise serializers.ValidationError("user is in contributors")
+        return value
+
 
 class IssueListSerializer(ModelSerializer):
     project = serializers.ReadOnlyField(source="project.title")

@@ -68,7 +68,10 @@ class ProjectViewset(ModelViewSet):
         """
         post: Add a contributor to a project, only accessible to a project contributor
         """
-        serializer = self.get_serializer(data=request.data)
+        project = self.get_object()
+        serializer_context = self.get_serializer_context()
+        serializer_context["contributors"] = project.all_contributors
+        serializer = self.get_serializer(data=request.data, context=serializer_context)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
