@@ -92,6 +92,8 @@ Position yourself in the local directory in which you want to position the sourc
 ``` bash
 python manage.py generateschema  --file project/schema.yaml --title "softdesk Api"
 
-``
+```
+
 ### <a name="use"></a>Uses
 
+[API documentation](https://documenter.getpostman.com/view/11542998/Uze1xjyg)
