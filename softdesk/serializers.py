@@ -52,7 +52,13 @@ class ContributorSerializer(ModelSerializer):
 
     class Meta:
         model = Contributor
-        fields = ["user", "permission"]
+        fields = ["id", "user", "permission"]
+
+    def validate_user(self, value):
+        users = self.context["contributors"]
+        if value in users:
+            raise serializers.ValidationError("user is in contributors")
+        return value
 
 
 class ContributorDetailSerializer(ModelSerializer):
@@ -60,7 +66,7 @@ class ContributorDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Contributor
-        fields = ["project", "user", "permission"]
+        fields = ["id", "project", "user", "permission"]
 
     def validate_user(self, value):
         users = self.context["contributors"]
@@ -83,7 +89,14 @@ class IssueListSerializer(ModelSerializer):
             "tag",
             "priority",
             "status",
+            "assignee",
         ]
+
+    def validate_assignee(self, value):
+        expected_assignee = self.context["contributors"]
+        if value not in expected_assignee:
+            raise serializers.ValidationError("Assignee not in contributors")
+        return value
 
 
 class IssueDetailSerializer(ModelSerializer):

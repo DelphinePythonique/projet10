@@ -1,12 +1,12 @@
 openapi: 3.0.2
 info:
-  title: softdesk's api
+  title: softdesk Api
   version: ''
 paths:
   /api/project/:
     get:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       operationId: listProjects
       description: Returns the list of projects to which the authenticated user contributes.
       parameters:
@@ -179,7 +179,7 @@ paths:
           description: ''
       tags:
       - Project
-  /api/issue/:
+  /api/project/{parent_lookup_project}/issue/:
     get:
       security:
         - bearerAuth: [ ]
@@ -187,6 +187,12 @@ paths:
       description: Return the list of issues linked to project to which the authenticated
         user contributes.
       parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: limit
         required: false
         in: query
@@ -227,7 +233,41 @@ paths:
       tags:
       - project
       - issue
-  /api/issue/{id}/:
+    post:
+      security:
+        - bearerAuth: [ ]
+      operationId: createIssue
+      description: create an issue linked to project to which the authenticated user
+        contributes.
+      parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Issue'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+          description: ''
+      tags:
+      - project
+      - issue
+  /api/project/{parent_lookup_project}/issue/{id}/:
     get:
       security:
         - bearerAuth: [ ]
@@ -235,6 +275,12 @@ paths:
       description: Return an issue linked to project to which the authenticated user
         contributes.
       parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -257,6 +303,12 @@ paths:
       operationId: updateIssue
       description: update an issue, only accessible to issue's author
       parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -290,6 +342,12 @@ paths:
       operationId: partialUpdateIssue
       description: update an issue, only accessible to issue's author
       parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -323,6 +381,12 @@ paths:
       operationId: destroyIssue
       description: delete an issue, only accessible to issue's author
       parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -335,7 +399,7 @@ paths:
       tags:
       - project
       - issue
-  /api/comment/:
+  /api/project/{parent_lookup_issue__project}/issue/{parent_lookup_issue}/comment/:
     get:
       security:
         - bearerAuth: [ ]
@@ -343,6 +407,18 @@ paths:
       description: Returns the list of comments linked to project which the authenticated
         user contributes.
       parameters:
+      - name: parent_lookup_issue__project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: parent_lookup_issue
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: limit
         required: false
         in: query
@@ -384,14 +460,67 @@ paths:
       - project
       - issue
       - comment
-  /api/comment/{id}/:
+    post:
+      security:
+        - bearerAuth: [ ]
+      operationId: createComment
+      description: create a comment linked to project's issue which the authenticated
+        user contributes.
+      parameters:
+      - name: parent_lookup_issue__project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: parent_lookup_issue
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - project
+      - issue
+      - comment
+  /api/project/{parent_lookup_issue__project}/issue/{parent_lookup_issue}/comment/{id}/:
     get:
       security:
         - bearerAuth: [ ]
       operationId: retrieveComment
-      description: Return a comment linked to project which the authenticated user
-        contributes.
+      description: Return a comment linked to project's issue which the authenticated
+        user contributes.
       parameters:
+      - name: parent_lookup_issue__project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: parent_lookup_issue
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -415,6 +544,18 @@ paths:
       operationId: updateComment
       description: update a comment, only accessible to comment's author
       parameters:
+      - name: parent_lookup_issue__project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: parent_lookup_issue
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -449,6 +590,18 @@ paths:
       operationId: partialUpdateComment
       description: update an issue, only accessible to comment's author
       parameters:
+      - name: parent_lookup_issue__project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: parent_lookup_issue
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -483,6 +636,18 @@ paths:
       operationId: destroyComment
       description: delete an issue, only accessible to comment's author
       parameters:
+      - name: parent_lookup_issue__project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: parent_lookup_issue
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: id
         in: path
         required: true
@@ -496,6 +661,147 @@ paths:
       - project
       - issue
       - comment
+  /api/project/{parent_lookup_project}/user/:
+    get:
+      security:
+        - bearerAuth: [ ]
+      operationId: listContributors
+      description: Return the list of contributors linked to project
+      parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+      - contributor
+    post:
+      security:
+        - bearerAuth: [ ]
+      operationId: createContributor
+      description: add a contributor linked to project to which the authenticated
+        user contributes.
+      parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+      - contributor
+  /api/project/{parent_lookup_project}/user/{id}/:
+    get:
+      security:
+        - bearerAuth: [ ]
+      operationId: retrieveContributor
+      description: Return a contributor linked to project to which the authenticated
+        user contributes .
+      parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+      - contributor
+    delete:
+      security:
+        - bearerAuth: [ ]
+      operationId: destroyContributor
+      description: delete a contributor
+      parameters:
+      - name: parent_lookup_project
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - project
+      - contributor
   /api/token/refresh/:
     post:
       operationId: createTokenRefresh
@@ -520,10 +826,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  access:
-                    type: string
+                $ref: '#/components/schemas/TokenRefresh'
           description: ''
       tags:
       - api
@@ -551,12 +854,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  refresh:
-                    type: string
-                  access:
-                    type: string
+                $ref: '#/components/schemas/TokenObtainPair'
           description: ''
       tags:
       - api
@@ -569,122 +867,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Signup'
+              $ref: '#/components/schemas/Register'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Signup'
+              $ref: '#/components/schemas/Register'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Signup'
+              $ref: '#/components/schemas/Register'
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Signup'
+                $ref: '#/components/schemas/Register'
           description: ''
       tags:
       - api
-  /api/project/{id}/add_contributor/:
-    post:
-      security:
-        - bearerAuth: [ ]
-      operationId: addContributorProject
-      description: Add a contributor to a project, only accessible to a project contributor
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: ''
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Project'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Project'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Project'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-          description: ''
-      tags:
-      - Project
-  /api/project/{id}/add_issue/:
-    post:
-      security:
-        - bearerAuth: [ ]
-      operationId: addIssueProject
-      description: Add an issue to a project, only accessible to a project contributor
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: ''
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Project'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Project'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Project'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-          description: ''
-      tags:
-      - Project
-  /api/issue/{id}/add_comment/:
-    post:
-      security:
-        - bearerAuth: [ ]
-      operationId: addCommentIssue
-      description: Add a comment to an issue, only accessible to a project contributor
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: ''
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Issue'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Issue'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Issue'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Issue'
-          description: ''
-      tags:
-      - project
-      - issue
 components:
   securitySchemes:
     bearerAuth: # arbitrary name for the security scheme
@@ -722,15 +920,12 @@ components:
         id:
           type: integer
           readOnly: true
-        project:
-          type: string
-          readOnly: true
         title:
           type: string
           maxLength: 128
-        author:
+        description:
           type: string
-          readOnly: true
+          maxLength: 2048
         tag:
           enum:
           - BUG
@@ -755,6 +950,22 @@ components:
           type: string
           description: This field is used to categorize the issue. Use, TODO=>to do,
             INPROGESS=>in progress, FINISHED=>finished
+        project:
+          type: string
+          readOnly: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        author:
+          type: string
+          readOnly: true
+        assignee:
+          type: integer
+          nullable: true
+        comments:
+          type: string
+          readOnly: true
       required:
       - title
       - tag
@@ -782,6 +993,22 @@ components:
           type: string
           format: date-time
           readOnly: true
+    Contributor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        project:
+          type: string
+          readOnly: true
+        user:
+          type: integer
+        permission:
+          type: boolean
+      required:
+      - user
+      - permission
     TokenRefresh:
       type: object
       properties:
@@ -803,7 +1030,7 @@ components:
       required:
       - username
       - password
-    Signup:
+    Register:
       type: object
       properties:
         username:

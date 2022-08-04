@@ -7,8 +7,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
-from softdesk.models import Project, Issue, Comment
+from softdesk.models import Project, Issue, Comment, Contributor
 from softdesk.permissions import IsOwner, IsContributor
 from softdesk.serializers import (
     ProjectListSerializer,
@@ -18,10 +19,11 @@ from softdesk.serializers import (
     IssueListSerializer,
     CommentListSerializer,
     CommentDetailSerializer,
+    ContributorSerializer,
 )
 
 
-class ProjectViewset(ModelViewSet):
+class ProjectViewset(NestedViewSetMixin, ModelViewSet):
     """
     list:
     Returns the list of projects to which the authenticated user contributes.
@@ -51,49 +53,10 @@ class ProjectViewset(ModelViewSet):
 
     serializer_class = ProjectListSerializer
     detail_serializer_class = ProjectDetailSerializer
-    add_contributor_serializer_class = ContributorDetailSerializer
-    add_issue_serializer_class = IssueDetailSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        if isinstance(serializer, (ProjectListSerializer, ProjectDetailSerializer)):
-            serializer.save(author=self.request.user)
-        if isinstance(serializer, ContributorDetailSerializer):
-            serializer.save(project=self.get_object())
-        if isinstance(serializer, IssueDetailSerializer):
-            serializer.save(project=self.get_object(), author=self.request.user)
-
-    @action(detail=True, methods=["POST"])
-    def add_contributor(self, request, *args, **kwargs):
-        """
-        post: Add a contributor to a project, only accessible to a project contributor
-        """
-        project = self.get_object()
-        serializer_context = self.get_serializer_context()
-        serializer_context["contributors"] = project.all_contributors
-        serializer = self.get_serializer(data=request.data, context=serializer_context)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
-        )
-
-    @action(detail=True, methods=["POST"])
-    def add_issue(self, request, *args, **kwargs):
-        """
-        post: Add an issue to a project, only accessible to a project contributor
-        """
-        project = self.get_object()
-        serializer_context = self.get_serializer_context()
-        serializer_context["contributors"] = project.all_contributors
-        serializer = self.get_serializer(data=request.data, context=serializer_context)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
-        )
+        serializer.save(author=self.request.user)
 
     def get_queryset(self):
 
@@ -120,16 +83,13 @@ class ProjectViewset(ModelViewSet):
         return super().get_permissions()
 
 
-class IssueViewset(
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
-):
+class IssueViewset(NestedViewSetMixin, ModelViewSet):
     """
     list:
     Return the list of issues linked to project to which the authenticated user contributes.
+
+    create:
+    create an issue linked to project to which the authenticated user contributes.
 
     retrieve:
     Return an issue linked to project to which the authenticated user contributes.
@@ -156,17 +116,6 @@ class IssueViewset(
     add_comment_serializer_class = CommentDetailSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=True, methods=["POST"])
-    def add_comment(self, request, *args, **kwargs):
-        """
-        post: Add a comment to an issue, only accessible to a project contributor
-        """
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(issue=self.get_object(), author=self.request.user)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
     def get_serializer_class(self):
         if self.action in ("retrieve", "partial_update", "update"):
             return self.detail_serializer_class
@@ -192,38 +141,94 @@ class IssueViewset(
         ).distinct()
 
     def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
+        partial = kwargs.pop("partial", False)
         instance = self.get_object()
 
         serializer_context = self.get_serializer_context()
         serializer_context["contributors"] = instance.all_contributors
 
-        serializer = self.get_serializer(instance, data=request.data, partial=partial, context=serializer_context)
+        serializer = self.get_serializer(
+            instance, data=request.data, partial=partial, context=serializer_context
+        )
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
-        if getattr(instance, '_prefetched_objects_cache', None):
+        if getattr(instance, "_prefetched_objects_cache", None):
             # If 'prefetch_related' has been applied to a queryset, we need to
             # forcibly invalidate the prefetch cache on the instance.
             instance._prefetched_objects_cache = {}
 
         return Response(serializer.data)
 
+    def create(self, request, *args, **kwargs):
+        project = Project.objects.get(pk=self.kwargs["parent_lookup_project"])
+        serializer_context = self.get_serializer_context()
+        serializer_context["contributors"] = project.all_contributors
 
-class CommentViewset(
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
-):
+        serializer = self.get_serializer(data=request.data, context=serializer_context)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(project=project, author=self.request.user)
+
+        return Response(serializer.data)
+
+
+class ContributorViewset(NestedViewSetMixin, mixins.CreateModelMixin,
+                   mixins.RetrieveModelMixin,
+                   mixins.DestroyModelMixin,
+                   mixins.ListModelMixin,
+                   GenericViewSet):
+    """
+    list:
+    Return the list of contributors linked to project
+
+    create:
+    add a contributor linked to project to which the authenticated user contributes.
+
+    retrieve:
+    Return a contributor linked to project to which the authenticated user contributes .
+
+
+    destroy:
+    delete a contributor
+
+    """
+
+    schema = AutoSchema(
+        tags=["project", "contributor"],
+        component_name="Contributor",
+        operation_id_base="Contributor",
+    )
+
+    serializer_class = ContributorDetailSerializer
+    detail_serializer_class = ContributorDetailSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+
+        return Contributor.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        project = Project.objects.get(pk=self.kwargs["parent_lookup_project"])
+        serializer_context = self.get_serializer_context()
+        serializer_context["contributors"] = project.all_contributors
+
+        serializer = self.get_serializer(data=request.data, context=serializer_context)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(project=project)
+        return Response(serializer.data)
+
+
+class CommentViewset(NestedViewSetMixin, ModelViewSet):
 
     """
     list:
     Returns the list of comments linked to project which the authenticated user contributes.
 
+    create:
+    create a comment linked to project's issue which the authenticated user contributes.
+
     retrieve:
-    Return a comment linked to project which the authenticated user contributes.
+    Return a comment linked to project's issue which the authenticated user contributes.
 
     update:
     update a comment, only accessible to comment's author
@@ -266,3 +271,14 @@ class CommentViewset(
             | Q(issue__project__contribute_by__user=self.request.user)
             | Q(issue__project__author=self.request.user)
         ).distinct()
+
+    def create(self, request, *args, **kwargs):
+        issue = Issue.objects.get(pk=self.kwargs["parent_lookup_issue"])
+        serializer_context = self.get_serializer_context()
+        serializer_context["contributors"] = issue.all_contributors
+
+        serializer = self.get_serializer(data=request.data, context=serializer_context)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(issue=issue, author=self.request.user)
+
+        return Response(serializer.data)

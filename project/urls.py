@@ -16,22 +16,44 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework_extensions.routers import ExtendedSimpleRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from authentication.views import RegisterView
-from softdesk.views import ProjectViewset, IssueViewset, CommentViewset
+from softdesk.views import (
+    ProjectViewset,
+    IssueViewset,
+    CommentViewset,
+    ContributorViewset,
+)
 
-router = routers.SimpleRouter()
-
-router.register('project', ProjectViewset, basename='project')
-router.register('issue', IssueViewset, basename='issue')
-router.register('comment', CommentViewset, basename='comment')
-
+router = ExtendedSimpleRouter()
+(
+    router.register("project", ProjectViewset, basename="project")
+    .register(
+        "issue",
+        IssueViewset,
+        basename="project-issue",
+        parents_query_lookups=["project"],
+    )
+    .register(
+        "comment",
+        CommentViewset,
+        basename="project-issue-comment",
+        parents_query_lookups=["issue__project", "issue"],
+    ),
+    router.register("project", ProjectViewset, basename="project").register(
+        "user",
+        ContributorViewset,
+        basename="project-user",
+        parents_query_lookups=["project"],
+    ),
+)
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/signup/', RegisterView.as_view(), name='signup'),
-    path('api/', include(router.urls))
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/signup/", RegisterView.as_view(), name="signup"),
+    path("api/", include(router.urls)),
 ]

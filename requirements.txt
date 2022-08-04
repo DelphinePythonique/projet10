@@ -1,4 +1,5 @@
 djangorestframework
 djangorestframework-simplejwt
+drf-extensions
 uritemplate
 pyyaml
