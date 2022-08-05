@@ -900,6 +900,9 @@ components:
           type: string
           description: project's title
           maxLength: 128
+        description:
+          type: string
+          maxLength: 2048
         author:
           type: string
           readOnly: true
@@ -1006,6 +1009,9 @@ components:
           type: integer
         permission:
           type: boolean
+        role:
+          type: string
+          maxLength: 50
       required:
       - user
       - permission

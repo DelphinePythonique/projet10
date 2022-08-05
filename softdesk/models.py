@@ -129,6 +129,7 @@ class Contributor(models.Model):
         related_name="contribute_by",
     )
     permission = models.BooleanField()
+    role = models.CharField(max_length=50, blank=True)
 
     @property
     def all_contributors(self):

@@ -96,4 +96,4 @@ python manage.py generateschema  --file project/schema.yaml --title "softdesk Ap
 
 ### <a name="use"></a>Uses
 
-[API documentation](https://documenter.getpostman.com/view/11542998/Uze1xjyg)
+[API documentation](https://documenter.getpostman.com/view/11542998/VUjHMTZh)

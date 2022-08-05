@@ -62,15 +62,6 @@ class ProjectViewset(NestedViewSetMixin, ModelViewSet):
             Q(author=self.request.user) | Q(contribute_by__user=self.request.user)
         ).distinct()
 
-    def get_serializer_class(self):
-        if self.action == "retrieve":
-            return self.detail_serializer_class
-        if self.action == "add_contributor":
-            return self.add_contributor_serializer_class
-        if self.action == "add_issue":
-            return self.add_issue_serializer_class
-        return super().get_serializer_class()
-
     def get_permissions(self):
         if self.action in ("update", "partial_update", "destroy"):
             self.permission_classes = [IsAuthenticated, IsOwner]
@@ -131,12 +122,16 @@ class IssueViewset(NestedViewSetMixin, ModelViewSet):
         return super().get_permissions()
 
     def get_queryset(self):
-
-        return Issue.objects.filter(
-            Q(author=self.request.user)
-            | Q(project__contribute_by__user=self.request.user)
-            | Q(project__author=self.request.user)
-        ).distinct()
+        project = Project.objects.get(pk=self.kwargs["parent_lookup_project"])
+        return (
+            Issue.objects.filter(project=project)
+            .filter(
+                Q(author=self.request.user)
+                | Q(project__contribute_by__user=self.request.user)
+                | Q(project__author=self.request.user)
+            )
+            .distinct()
+        )
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop("partial", False)
@@ -205,8 +200,8 @@ class ContributorViewset(
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-
-        return Contributor.objects.all()
+        project = Project.objects.get(pk=self.kwargs["parent_lookup_project"])
+        return Contributor.objects.filter(project=project)
 
     def create(self, request, *args, **kwargs):
         project = Project.objects.get(pk=self.kwargs["parent_lookup_project"])
@@ -266,12 +261,16 @@ class CommentViewset(NestedViewSetMixin, ModelViewSet):
         return super().get_permissions()
 
     def get_queryset(self):
-
-        return Comment.objects.filter(
-            Q(author=self.request.user)
-            | Q(issue__project__contribute_by__user=self.request.user)
-            | Q(issue__project__author=self.request.user)
-        ).distinct()
+        issue = Issue.objects.get(pk=self.kwargs["parent_lookup_issue"])
+        return (
+            Comment.objects.filter(issue=issue)
+            .filter(
+                Q(author=self.request.user)
+                | Q(issue__project__contribute_by__user=self.request.user)
+                | Q(issue__project__author=self.request.user)
+            )
+            .distinct()
+        )
 
     def create(self, request, *args, **kwargs):
         issue = Issue.objects.get(pk=self.kwargs["parent_lookup_issue"])

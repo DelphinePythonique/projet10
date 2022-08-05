@@ -9,7 +9,7 @@ class ProjectListSerializer(ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ["id", "title", "author", "type"]
+        fields = ["id", "title", "author", "type", "description"]
 
     def validate_name(self, value):
         if Project.objects.filter(name=value).exists():
@@ -52,7 +52,7 @@ class ContributorSerializer(ModelSerializer):
 
     class Meta:
         model = Contributor
-        fields = ["id", "user", "permission"]
+        fields = ["id", "user", "permission", "role"]
 
     def validate_user(self, value):
         users = self.context["contributors"]
@@ -66,7 +66,7 @@ class ContributorDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Contributor
-        fields = ["id", "project", "user", "permission"]
+        fields = ["id", "project", "user", "permission", "role"]
 
     def validate_user(self, value):
         users = self.context["contributors"]
