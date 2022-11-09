@@ -39,7 +39,7 @@ Position yourself in the local directory in which you want to position the sourc
 - Position yourself in the project directory, create a virtual environment
 
 ``` bash
- cd projet9
+ cd projet10
  python -m venv env
 ```
 - Activate virtual environment
